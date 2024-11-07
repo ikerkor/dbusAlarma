@@ -10,5 +10,5 @@ RUN apt-get update && apt-get install -y python3.10 python3-pip
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 # This command basically executes your main file with Python.
-CMD ["python", "main.py"]
+CMD ["python3.10", "main.py"]
 EXPOSE 8443/tcp
