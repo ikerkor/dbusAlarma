@@ -4,6 +4,8 @@ from mcr.microsoft.com/playwright:v1.48.1-jammy
 WORKDIR /app
 # This command would copy EVERY FILE from your project folder into your container, so be careful.
 COPY . .
+# Install Python 3.10 and pip
+RUN apt-get update && apt-get install -y python3.10 python3-pip
 # Installing needed packages and dependencies.**
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
