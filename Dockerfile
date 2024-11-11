@@ -11,4 +11,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 # This command basically executes your main file with Python.
 CMD ["python3.10", "main.py"]
-EXPOSE 8443/tcp
+# EXPOSE 8443/tcp

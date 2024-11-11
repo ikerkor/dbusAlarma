@@ -18,10 +18,10 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 spain_tz = pytz.timezone('Europe/Madrid')
-if GARAPEN == "1":
-    DEV_DIC = {"Geltokia": "361", "Linea": "36", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
+
+DEV_DIC = {"Geltokia": "361", "Linea": "36", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
                          "Noiz": "9", "Errepikapena": "0"}
-    DEV_URL = r"https://dbus.eus/parada/505-sierra-urbia-2/"
+DEV_URL = r"https://dbus.eus/parada/505-sierra-urbia-2/"
 
 async def start(update: Update, context) -> None:
     """
