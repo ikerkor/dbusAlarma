@@ -127,7 +127,7 @@ def main() -> None:
         settings.logger.info("PORT: " + str(settings.PORT))
         settings.logger.info("TELEGRAM_USER: " + str(settings.TELEGRAM_USER))
         settings.logger.info("WEBHOOK_URL: " + str(settings.WEBHOOK_URL))
-        application.start_webhook(listen="0.0.0.0",
+        application.run_webhook(listen="0.0.0.0",
                               port=int(settings.PORT),
                               url_path=settings.TELEGRAM_TOKEN,
                               webhook_url=settings.WEBHOOK_URL + settings.TELEGRAM_TOKEN)
