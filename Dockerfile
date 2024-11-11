@@ -8,7 +8,7 @@ COPY . .
 RUN apt-get update && apt-get install -y python3.10 python3-pip
 # Installing needed packages and dependencies.**
 RUN pip install --upgrade pip
-RUN pip install "python-telegram-bot[job-queue]"
+RUN pip install "python-telegram-bot[job-queue, webhooks]"
 RUN pip install -r requirements.txt
 # This command basically executes your main file with Python.
 CMD ["python3.10", "main.py"]
