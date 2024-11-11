@@ -117,9 +117,6 @@ def main() -> None:
     # dispatcher.add_handler(CommandHandler("kendu"),kendu_alarma)
     application.add_handler(elkarrizketa.conv_handler)
 
-
-
-
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
         settings.logger.info("Polling bidez exekutatuta")
@@ -128,13 +125,12 @@ def main() -> None:
     elif settings.WEBHOOK == "1":
         settings.logger.info("Webhook bidez exekutatuta")
         settings.logger.info("PORT: " + str(settings.PORT))
-        settings.logger.info("TELEGRAM USER: " + str(settings.MY_TELEGRAM_USER))
+        settings.logger.info("TELEGRAM_USER: " + str(settings.TELEGRAM_USER))
         settings.logger.info("WEBHOOK_URL: " + str(settings.WEBHOOK_URL))
         application.start_webhook(listen="0.0.0.0",
                               port=int(settings.PORT),
                               url_path=settings.TELEGRAM_TOKEN,
                               webhook_url=settings.WEBHOOK_URL + settings.TELEGRAM_TOKEN)
-
 
 
 if __name__ == '__main__':
