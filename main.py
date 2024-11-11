@@ -19,9 +19,20 @@ logger = logging.getLogger(__name__)
 
 spain_tz = pytz.timezone('Europe/Madrid')
 
-DEV_DIC = {"Geltokia": "361", "Linea": "36", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
+DEV_DIC = {"Geltokia": "361", "Linea": "38", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
                          "Noiz": "9", "Errepikapena": "0"}
-DEV_URL = r"https://dbus.eus/parada/505-sierra-urbia-2/"
+DEV_URL = r"https://dbus.eus/parada/129-herrera-2/"
+
+
+async def ping_self():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        context = await browser.new_context()
+        page = await context.new_page()
+        await page.goto(settings.WEBHOOK_URL)
+        await page.close()
+        await browser.close()
+
 
 async def start(update: Update, context) -> None:
     """
@@ -61,13 +72,13 @@ async def begiratu(context: ContextTypes.DEFAULT_TYPE) -> None:
         await browser.close()  # Use await with close
     dicAlarma_job = context.job.data
     #try:
-    if not dynamic_content or "min." not in dynamic_content or dicAlarma_job["Linea"] not in dynamic_content:
+    if not dynamic_content or "min." not in dynamic_content or dicAlarma_job["Linea"] not in dynamic_content:  # Errore kudeaketa hobea
         raise(Exception)
-    minutuak = dynamic_content[-7:-5]
+    minutuak = dynamic_content.split(f"Linea {dicAlarma_job['Linea']}")[1].split("min.")[0][-3:-1]
     if int(minutuak) > int(dicAlarma_job["Noiz"]):
         context.job_queue.run_once(
             begiratu,
-            int((int(minutuak)-int(dicAlarma_job["Noiz"]))/2*60),
+            int((int(minutuak)-int(dicAlarma_job["Noiz"]))/2*60), # TODO: irakurritako denbora2 > denbora1 bada kasorik ez
             name=str(context.job.chat_id)+context.job.data["Geltokia"]+context.job.data["Linea"]
                          +context.job.data["Noiztik"]+context.job.data["Noiz"]+context.job.data["Errepikapena"]+"_aux",
             data=context.job.data,
@@ -113,9 +124,10 @@ def main() -> None:
 
     # Dbus alarma finktatzeko elkarrizketa kudeatzailea sortu eta gehitu.
     application.add_handler(CommandHandler(["start", "help"], start))
-    # application.add_handler(CommandHandler("finkatu", finkatu_alarma))
-    # dispatcher.add_handler(CommandHandler("kendu"),kendu_alarma)
     application.add_handler(elkarrizketa.conv_handler)
+
+    # Bizirik jarraitzeko lana gehitu
+    application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
 
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
