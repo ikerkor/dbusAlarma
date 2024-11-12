@@ -19,8 +19,8 @@ logger = logging.getLogger(__name__)
 
 spain_tz = pytz.timezone('Europe/Madrid')
 
-DEV_DIC = {"Geltokia": "361", "Linea": "38", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
-                         "Noiz": "9", "Errepikapena": "0"}
+DEV_DIC = {"Geltokia": "361", "Linea": "24", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
+                         "Noiz": "20", "Errepikapena": "0"}
 DEV_URL = r"https://dbus.eus/parada/129-herrera-2/"
 
 
@@ -29,7 +29,7 @@ async def ping_self(context: ContextTypes.DEFAULT_TYPE):
         browser = await p.chromium.launch(headless=True)
         new_context = await browser.new_context()
         page = await new_context.new_page()
-        await page.goto(f"{settings.WEBHOOK_URL}:{settings.PORT}")
+        await page.goto(f"{settings.WEBHOOK_URL}:{settings.PORT}", timeout=0)
         await page.close()
         await browser.close()
 
@@ -125,7 +125,7 @@ def main() -> None:
     application.add_handler(elkarrizketa.conv_handler)
 
     # Bizirik jarraitzeko lana gehitu
-    application.job_queue.run_repeating(ping_self, 2*60, name="biziberritu")
+    application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
 
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
