@@ -29,7 +29,7 @@ async def ping_self():
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context()
         page = await context.new_page()
-        await page.goto(settings.WEBHOOK_URL)
+        await page.goto(f"{settings.WEBHOOK_URL}:{settings.PORT}")
         await page.close()
         await browser.close()
 
@@ -127,7 +127,7 @@ def main() -> None:
     application.add_handler(elkarrizketa.conv_handler)
 
     # Bizirik jarraitzeko lana gehitu
-    application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
+    application.job_queue.run_repeating(ping_self, 2*60, name="biziberritu")
 
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
@@ -142,7 +142,7 @@ def main() -> None:
         application.run_webhook(listen="0.0.0.0",
                               port=int(settings.PORT),
                               url_path=settings.TELEGRAM_TOKEN,
-                              webhook_url=settings.WEBHOOK_URL + settings.TELEGRAM_TOKEN)
+                              webhook_url=settings.WEBHOOK_URL + "\\" + settings.TELEGRAM_TOKEN)
 
 
 if __name__ == '__main__':
