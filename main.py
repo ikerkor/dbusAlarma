@@ -24,11 +24,11 @@ DEV_DIC = {"Geltokia": "361", "Linea": "38", "Noiztik": (datetime.datetime.now(s
 DEV_URL = r"https://dbus.eus/parada/129-herrera-2/"
 
 
-async def ping_self():
+async def ping_self(context: ContextTypes.DEFAULT_TYPE):
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        context = await browser.new_context()
-        page = await context.new_page()
+        new_context = await browser.new_context()
+        page = await new_context.new_page()
         await page.goto(f"{settings.WEBHOOK_URL}:{settings.PORT}")
         await page.close()
         await browser.close()
@@ -104,9 +104,7 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
     :param data:
     :return:
     """
-    # Prueba
     chat_id = update.effective_message.chat_id
-    # context.job_queue.run_once(begiratu, int(data["Noiz"]), chat_id=chat_id)
     context.job_queue.run_daily(
         begiratu,
         datetime.time(int(data["Noiztik"][0:2]), int(data["Noiztik"][3:5]), tzinfo=spain_tz),
@@ -142,7 +140,7 @@ def main() -> None:
         application.run_webhook(listen="0.0.0.0",
                               port=int(settings.PORT),
                               url_path=settings.TELEGRAM_TOKEN,
-                              webhook_url=settings.WEBHOOK_URL + "\\" + settings.TELEGRAM_TOKEN)
+                              webhook_url=settings.WEBHOOK_URL + "/" + settings.TELEGRAM_TOKEN)
 
 
 if __name__ == '__main__':
