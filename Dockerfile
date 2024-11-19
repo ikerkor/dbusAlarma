@@ -13,6 +13,3 @@ RUN pip install -r requirements.txt
 # This command basically executes your main file with Python.
 CMD ["python3.10", "main.py"]
 EXPOSE 8443/tcp
-# Biziberritzeko http POST eskari errepikakorra
-HEALTHCHECK --interval=27m --timeout=10s \
-  CMD curl --fail --silent --show-error --output /dev/null --ignore-exit-status -X POST -H "Content-Type: application/json" -d '{"update_id": 123, "message": {"text": "Hello"}}' ${WEBHOOK_URL}/${TELEGRAM_TOKEN}

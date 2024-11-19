@@ -6,6 +6,8 @@ from telegram.ext import Updater, CommandHandler, ContextTypes, Application
 import datetime
 import pytz
 import settings, elkarrizketa
+import requests
+import json
 
 from settings import GARAPEN
 
@@ -25,13 +27,11 @@ DEV_URL = r"https://dbus.eus/parada/129-herrera-2/"
 
 
 async def ping_self(context: ContextTypes.DEFAULT_TYPE):
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        new_context = await browser.new_context()
-        page = await new_context.new_page()
-        await page.goto(settings.WEBHOOK_URL + "/" + settings.TELEGRAM_TOKEN)  # page.goto(f"{settings.WEBHOOK_URL}:{settings.PORT}")
-        await page.close()
-        await browser.close()
+
+    webhook_url = settings.WEBHOOK_URL + "/" + settings.TELEGRAM_TOKEN  # replace with your actual webhook URL
+    data = {"update_id": 123}
+    headers = {"Content-Type": "application/json"}
+    requests.post(webhook_url, headers=headers, data=json.dumps(data))
 
 
 async def start(update: Update, context) -> None:
@@ -125,7 +125,7 @@ def main() -> None:
     application.add_handler(elkarrizketa.conv_handler)
 
     # Bizirik jarraitzeko lana gehitu
-    # application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
+    application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
 
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
