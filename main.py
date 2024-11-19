@@ -29,7 +29,7 @@ async def ping_self(context: ContextTypes.DEFAULT_TYPE):
         browser = await p.chromium.launch(headless=True)
         new_context = await browser.new_context()
         page = await new_context.new_page()
-        await page.goto(f"{settings.WEBHOOK_URL}:{settings.PORT}", timeout=0)
+        await page.goto(settings.WEBHOOK_URL + "/" + settings.TELEGRAM_TOKEN)  # page.goto(f"{settings.WEBHOOK_URL}:{settings.PORT}")
         await page.close()
         await browser.close()
 
@@ -108,7 +108,7 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
     context.job_queue.run_daily(
         begiratu,
         datetime.time(int(data["Noiztik"][0:2]), int(data["Noiztik"][3:5]), tzinfo=spain_tz),
-        (0, 1, 2, 3, 4, 5, 6),
+        (0, 1, 2, 3, 4, 5, 6),  # TODO: Eskuratu erabiltzailearengandik.
         data=data,
         name=str(chat_id)+data["Geltokia"]+data["Linea"]+data["Noiztik"]+data["Noiz"]+data["Errepikapena"],
         chat_id=chat_id,
@@ -125,7 +125,7 @@ def main() -> None:
     application.add_handler(elkarrizketa.conv_handler)
 
     # Bizirik jarraitzeko lana gehitu
-    application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
+    # application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
 
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
