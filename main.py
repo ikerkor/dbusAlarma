@@ -61,16 +61,18 @@ async def begiratu(context: ContextTypes.DEFAULT_TYPE) -> None:
     :param context:
     :return:
     """
+    dicAlarma_job = context.job.data
+
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         browser_context = await browser.new_context()
         page = await browser_context.new_page()
-        await page.goto(DEV_URL)
+        await page.goto(dicAlarma_job["Geltokia"])
         await asyncio.sleep(4)  # Use non-blocking sleep function
         element = await page.query_selector("#consulta_horarios")  # Use await with query_selector
         dynamic_content = await element.text_content()  # Use await with text_content
         await browser.close()  # Use await with close
-    dicAlarma_job = context.job.data
+
     #try:
     if not dynamic_content or "min." not in dynamic_content or dicAlarma_job["Linea"] not in dynamic_content:  # Errore kudeaketa hobea
         raise(Exception)
@@ -105,6 +107,7 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
     :return:
     """
     chat_id = update.effective_message.chat_id
+
     context.job_queue.run_daily(
         begiratu,
         datetime.time(int(data["Noiztik"][0:2]), int(data["Noiztik"][3:5]), tzinfo=spain_tz),
@@ -112,7 +115,7 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
         data=data,
         name=str(chat_id)+data["Geltokia"]+data["Linea"]+data["Noiztik"]+data["Noiz"]+data["Errepikapena"],
         chat_id=chat_id,
-)
+    )
 
 def main() -> None:
     """Run the bot."""

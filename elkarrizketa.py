@@ -21,7 +21,8 @@ async def gehitu(update: Update, context: CallbackContext) -> int:
         dicAlarma[update.message.chat.id] = []
     dicAlarma[update.message.chat.id].append({})
     time.sleep(0.5)
-    await update.message.reply_text('Zein geltokitarako finkatu nahi duzu alarma (zenbakia bakarrik)?')
+    await update.message.reply_text('Idatzi nahi duzun geltokiko iritsieren url-a. Adibidez, https://dbus.eus/parada/129-herrera-2/.'
+                                    'Bilatu QRa geltokian bertan, edo bilatu dbusen weborrian.')
     return GELTOKIA
 
 
