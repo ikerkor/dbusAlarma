@@ -21,8 +21,8 @@ async def gehitu(update: Update, context: CallbackContext) -> int:
         dicAlarma[update.message.chat.id] = []
     dicAlarma[update.message.chat.id].append({})
     time.sleep(0.5)
-    await update.message.reply_text('Idatzi nahi duzun geltokiko iritsieren url-a. Adibidez, https://dbus.eus/parada/129-herrera-2/.'
-                                    'Bilatu QRa geltokian bertan, edo bilatu dbusen weborrian.')
+    await update.message.reply_text('Idatzi nahi duzun geltokiko iritsieren url-a. Adibidez, https://dbus.eus/parada/129-herrera-2/'
+                                    ' . Bilatu QRa geltokian bertan, edo bilatu dbusen weborrian.')
     return GELTOKIA
 
 
@@ -66,7 +66,7 @@ async def noiz (update: Update, context: CallbackContext) -> int:
     stNoiz = update.message.text
     dicAlarma[update.message.chat.id][-1]["Noiz"] = stNoiz
     time.sleep(0.5)
-    await update.message.reply_text('Zein errepikapen mota nahi duzu?\n'
+    await update.message.reply_text('Zein errepikapen mota nahi duzu?\n'  # TODO: Menua errepikapenetarako.
     '0 - Errepikapenik ez\n'
     '1 - Astegunetan\n'
     '2 - Egunero')
@@ -101,7 +101,7 @@ conv_handler = ConversationHandler(
         GELTOKIA: [MessageHandler(filters.TEXT & ~filters.COMMAND, geltokia)],
         LINEA: [MessageHandler(filters.TEXT & ~filters.COMMAND, linea)],
         NOIZTIK: [MessageHandler(filters.TEXT & ~filters.COMMAND, noiztik)],
-        NOIZ: [MessageHandler(filters.TEXT & ~filters.COMMAND, noiz)],
+        NOIZ: [MessageHandler(filters.TEXT & ~filters.COMMAND, noiz)], # TODO: Lana borratzeko konbertsazioa.
         ERREPIKAPENA: [MessageHandler(filters.TEXT & ~filters.COMMAND, errepikapena)]
     },
     fallbacks=[CommandHandler('utzi', utzi)],

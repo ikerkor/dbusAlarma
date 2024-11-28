@@ -2,10 +2,10 @@ import asyncio
 import logging
 from playwright.async_api import async_playwright
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, ContextTypes, Application
+from telegram.ext import CommandHandler, ContextTypes, Application
 import datetime
 import pytz
-import settings, elkarrizketa
+import settings, elkarrizketa, alarma_kudeaketa
 import requests
 import json
 
@@ -21,9 +21,8 @@ logger = logging.getLogger(__name__)
 
 spain_tz = pytz.timezone('Europe/Madrid')
 
-DEV_DIC = {"Geltokia": "361", "Linea": "24", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
-                         "Noiz": "20", "Errepikapena": "0"}
-DEV_URL = r"https://dbus.eus/parada/129-herrera-2/"
+DEV_DIC = {"Geltokia": r"https://dbus.eus/parada/129-herrera-2/", "Linea": "13", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
+                         "Noiz": "2", "Errepikapena": "0"}
 
 
 async def ping_self(context: ContextTypes.DEFAULT_TYPE):
@@ -102,7 +101,6 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
     Berariazko alarma lana gehkituko du lan-zerrendan.s
     :param update:
     :param context:
-    :param chat_id:
     :param data:
     :return:
     """
@@ -119,16 +117,13 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
 
 def main() -> None:
     """Run the bot."""
-    # Create the Updater and pass it your bot's token.
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(settings.TELEGRAM_TOKEN).build()
 
     # Dbus alarma finktatzeko elkarrizketa kudeatzailea sortu eta gehitu.
     application.add_handler(CommandHandler(["start", "help"], start))
     application.add_handler(elkarrizketa.conv_handler)
-
-    # Bizirik jarraitzeko lana gehitu
-    application.job_queue.run_repeating(ping_self, 27*60, name="biziberritu")
+    application.add_handler(alarma_kudeaketa.conv_handler)
 
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
@@ -137,14 +132,13 @@ def main() -> None:
         application.run_polling(allowed_updates=Update.ALL_TYPES)
     elif settings.WEBHOOK == "1":
         settings.logger.info("Webhook bidez exekutatuta")
-        settings.logger.info("PORT: " + str(settings.PORT))
-        settings.logger.info("TELEGRAM_USER: " + str(settings.TELEGRAM_USER))
-        settings.logger.info("WEBHOOK_URL: " + str(settings.WEBHOOK_URL))
         application.run_webhook(listen="0.0.0.0",
                               port=int(settings.PORT),
                               url_path=settings.TELEGRAM_TOKEN,
                               webhook_url=settings.WEBHOOK_URL + "/" + settings.TELEGRAM_TOKEN)
 
+    # Bizirik jarraitzeko lana gehitu
+    application.job_queue.run_repeating(ping_self, 14*60, name="biziberritu")
 
 if __name__ == '__main__':
     main()
