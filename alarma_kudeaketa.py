@@ -10,13 +10,12 @@ ZERRENDA, KENDU = range(2)
 
 # Define handlers
 async def kudeatu(update: Update, context: CallbackContext) -> int:
-    await update.message.reply_text('Aukeratu zerrenda bat:')
-    # Add logic to handle user input
+
     jobs = context.job_queue.jobs()
     mezua = ""
     for i, job in enumerate(jobs):
         if str(update.message.chat.id) in job.name:
-            mezua += f"{i}.  {job.name} \n"
+            mezua += f"{i}.\U0001F514 {job.name}\n"
     try:
         mezua = mezua[0:-2]
     except:

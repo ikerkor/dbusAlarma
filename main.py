@@ -8,6 +8,7 @@ import pytz
 import settings, elkarrizketa, alarma_kudeaketa
 import requests
 import json
+from apscheduler.schedulers.background import BackgroundScheduler
 
 from settings import GARAPEN
 
@@ -25,13 +26,12 @@ DEV_DIC = {"Geltokia": r"https://dbus.eus/parada/129-herrera-2/", "Linea": "13",
                          "Noiz": "2", "Errepikapena": "0"}
 
 
-async def ping_self(context: ContextTypes.DEFAULT_TYPE):
+def ping_self():
 
     webhook_url = settings.WEBHOOK_URL + "/" + settings.TELEGRAM_TOKEN  # replace with your actual webhook URL
     data = {"update_id": 123}
     headers = {"Content-Type": "application/json"}
     requests.post(webhook_url, headers=headers, data=json.dumps(data))
-
 
 async def start(update: Update, context) -> None:
     """
@@ -125,6 +125,11 @@ def main() -> None:
     application.add_handler(elkarrizketa.conv_handler)
     application.add_handler(alarma_kudeaketa.conv_handler)
 
+    # Bizirik jarraitzeko lana gehitu
+    scheduler1 = BackgroundScheduler()
+    scheduler1.add_job(id='biziberritu', func=ping_self, trigger='interval', seconds=14*60)
+    scheduler1.start()
+
     # Hasi bot-a polling ala webhook bidez
     if settings.WEBHOOK == "0":
         settings.logger.info("Polling bidez exekutatuta")
@@ -137,8 +142,6 @@ def main() -> None:
                               url_path=settings.TELEGRAM_TOKEN,
                               webhook_url=settings.WEBHOOK_URL + "/" + settings.TELEGRAM_TOKEN)
 
-    # Bizirik jarraitzeko lana gehitu
-    application.job_queue.run_repeating(ping_self, 14*60, name="biziberritu")
 
 if __name__ == '__main__':
     main()
