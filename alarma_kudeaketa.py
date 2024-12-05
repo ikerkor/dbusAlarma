@@ -18,7 +18,7 @@ async def kudeatu(update: Update, context: CallbackContext) -> int:
         if str(update.message.chat.id) in job.name and "_aux" not in job.name:
             mezua += f"{kontagailu}.\U0001F514 {job.name}\n"
             kontagailu += 1
-    if mezua.len() != "":
+    if mezua != "":
         try:
             mezua = mezua[0:-2]
             await update.message.reply_text(mezua)
@@ -29,15 +29,17 @@ async def kudeatu(update: Update, context: CallbackContext) -> int:
     return ZERRENDA
 
 async def zerrenda(update: Update, context: CallbackContext) -> int:
-    await update.message.reply_text('Aukeratu zerrenda bat:')
-    # Add logic to handle user input
-    print(context.job_queue.jobs())
+    await update.message.reply_text('Alarmarik kendu nahi baduzu, idatzi beraren zenbakia. Bestela, 0 edo /utzi.')
+
     return KENDU
 
 
 async def kendu(update: Update, context: CallbackContext) -> int:
-    await update.message.reply_text('Aukeratu kendu nahi duzun elementua:')
-    # Add logic to handle user input
+    lan_zenbakia = update.message.text
+    if lan_zenbakia != 0:
+        pass  # TODO: implementatu lanaren ezabaketa.
+    await update.message.reply_text('Ederki. Lanik kendu gabe utziko dugu elkarrizketa. Hurren arte!')
+
     return ConversationHandler.END
 
 
