@@ -6,7 +6,7 @@ from telegram.ext import CallbackContext, ConversationHandler, CommandHandler, M
 import main
 
 # Aldagai globalak
-GELTOKIA, LINEA, NOIZTIK, NOIZ, ERREPIKAPENA = range(5)  # Elkarrizketa-egoera-makinako egoerak
+GELTOKIA, LINEA, NOIZTIK, NOIZ = range(4)  # Elkarrizketa-egoera-makinako egoerak
 dicAlarma = {}  # Sarrerak gordetzeko hiztegia (aldibereko erabiltzailea saiesteko, azpihiztegiak)
 
 
@@ -21,8 +21,8 @@ async def gehitu(update: Update, context: CallbackContext) -> int:
         dicAlarma[update.message.chat.id] = []
     dicAlarma[update.message.chat.id].append({})
     time.sleep(0.5)
-    await update.message.reply_text('Idatzi nahi duzun geltokiko iritsieren url-a. Adibidez, https://dbus.eus/parada/129-herrera-2/'
-                                    ' . Bilatu QRa geltokian bertan, edo bilatu dbusen weborrian.')
+    await update.message.reply_text('Idatzi nahi duzun geltokiko iritsieren url-a. Adibidez, https://dbus.eus/parada/125-arri-berri-2/'
+                                    ' . Bilatu QRa geltokian bertan, edo arakatu dbusen weborria (euskarazko bertsioan dabil bakarrik).')
     return GELTOKIA
 
 
@@ -61,24 +61,10 @@ async def noiztik (update: Update, context: CallbackContext) -> int:
 
 async def noiz (update: Update, context: CallbackContext) -> int:
     """
-    "Noiz" gorde eta errepikapena galdetuko da.
+    "Noiz" gorde eta konbertsazioa bukatuko da
     """
     stNoiz = update.message.text
     dicAlarma[update.message.chat.id][-1]["Noiz"] = stNoiz
-    time.sleep(0.5)
-    await update.message.reply_text('Zein errepikapen mota nahi duzu?\n'  # TODO: Menua errepikapenetarako.
-    '0 - Errepikapenik ez\n'
-    '1 - Astegunetan\n'
-    '2 - Egunero')
-    return ERREPIKAPENA
-
-
-async def errepikapena (update: Update, context: CallbackContext) -> int:
-    """
-    "Errepikapena" gorde eta alarma gehituko du.
-    """
-    stErrepikapena = update.message.text
-    dicAlarma[update.message.chat.id][-1]["Errepikapena"] = stErrepikapena
     main.finkatu_alarma(update, context, dicAlarma[update.message.chat.id][-1])
     time.sleep(0.5)
     await update.message.reply_text('Xarmanki. Zure alarma zuzen gehitu da.')
@@ -101,8 +87,7 @@ conv_handler = ConversationHandler(
         GELTOKIA: [MessageHandler(filters.TEXT & ~filters.COMMAND, geltokia)],
         LINEA: [MessageHandler(filters.TEXT & ~filters.COMMAND, linea)],
         NOIZTIK: [MessageHandler(filters.TEXT & ~filters.COMMAND, noiztik)],
-        NOIZ: [MessageHandler(filters.TEXT & ~filters.COMMAND, noiz)], # TODO: Lana borratzeko konbertsazioa.
-        ERREPIKAPENA: [MessageHandler(filters.TEXT & ~filters.COMMAND, errepikapena)]
+        NOIZ: [MessageHandler(filters.TEXT & ~filters.COMMAND, noiz)]
     },
     fallbacks=[CommandHandler('utzi', utzi)],
 )

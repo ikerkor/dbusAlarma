@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0335b4ac-d6cf-4366-9453-2eedfc4a7b80" name="Changes" comment="Kendu elkarrizketa-egoera bypasseatu.">
+      <change afterPath="$PROJECT_DIR$/.idea/2410DbusAlarma.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alarma_kudeaketa.py" beforeDir="false" afterPath="$PROJECT_DIR$/alarma_kudeaketa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elkarrizketa.py" beforeDir="false" afterPath="$PROJECT_DIR$/elkarrizketa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ikerkor&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ikerkor/dbusAlarma.git&quot;,
+    &quot;accountId&quot;: &quot;36540d2c-0e83-4f8f-b6a4-e189719afb25&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2oAL6jGbxEuvUJUOMmd0b0cYgj7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.elkarrizketa.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.proba_selenium.executor": "Run",
+    "Python.timer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/ikerkor/Proiektuak/EsamojiBot",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="2410DbusAlarma" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-6a3326d57233-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.24807.21" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0335b4ac-d6cf-4366-9453-2eedfc4a7b80" name="Changes" comment="" />
+      <created>1730307260006</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730307260006</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Garapeneko oinarrizko bertsio funtzionala.">
+      <option name="closed" value="true" />
+      <created>1731003583953</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731003583953</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Version specification removed for playwright">
+      <option name="closed" value="true" />
+      <created>1731007315887</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731007315887</updated>
+    </task>
+    <task id="LOCAL-00003" summary="pip upgrade included to dockerfie">
+      <option name="closed" value="true" />
+      <created>1731007839793</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731007839793</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Image generation from playwright page added">
+      <option name="closed" value="true" />
+      <created>1731009188754</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731009188754</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Use playwright image.">
+      <option name="closed" value="true" />
+      <created>1731010186184</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731010186184</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Install python3.10 and pip">
+      <option name="closed" value="true" />
+      <created>1731010610193</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731010610193</updated>
+    </task>
+    <task id="LOCAL-00007" summary="CMD corrected">
+      <option name="closed" value="true" />
+      <created>1731011156256</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731011156256</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Always load constants and dont expose port">
+      <option name="closed" value="true" />
+      <created>1731337604543</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731337604543</updated>
+    </task>
+    <task id="LOCAL-00009" summary="pytz added to reqs and port exposed">
+      <option name="closed" value="true" />
+      <created>1731338072455</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731338072455</updated>
+    </task>
+    <task id="LOCAL-00010" summary="specific jobque install for python-telegram-bot">
+      <option name="closed" value="true" />
+      <created>1731341122199</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731341122199</updated>
+    </task>
+    <task id="LOCAL-00011" summary="MY_USER changed to USER">
+      <option name="closed" value="true" />
+      <created>1731342685546</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731342685546</updated>
+    </task>
+    <task id="LOCAL-00012" summary="start_webhook to run_webhook">
+      <option name="closed" value="true" />
+      <created>1731344729244</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1731344729244</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Specifically install webhooks with PTB">
+      <option name="closed" value="true" />
+      <created>1731348437806</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1731348437806</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Biziberritzeko lana gehitu">
+      <option name="closed" value="true" />
+      <created>1731362570635</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1731362570635</updated>
+    </task>
+    <task id="LOCAL-00015" summary="ping specific port in back4app container">
+      <option name="closed" value="true" />
+      <created>1731412256355</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1731412256355</updated>
+    </task>
+    <task id="LOCAL-00016" summary="pass context parameter to pin_self function.">
+      <option name="closed" value="true" />
+      <created>1731412813994</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1731412813994</updated>
+    </task>
+    <task id="LOCAL-00017" summary="biziberritzea 27ro eta 0 timeouteko gotoa url-ra">
+      <option name="closed" value="true" />
+      <created>1731421532746</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1731421532746</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Biziberritze saiakerarik gabeko proba.">
+      <option name="closed" value="true" />
+      <created>1732039412167</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1732039412167</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Healthcheck gehituta.">
+      <option name="closed" value="true" />
+      <created>1732043032846</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1732043032846</updated>
+    </task>
+    <task id="LOCAL-00020" summary="requests modulua requirements.txt-en gehituta, eta ping_self POST eskari bat egiteko eraldatuta, eta healthcheck kenduta.">
+      <option name="closed" value="true" />
+      <created>1732046442546</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1732046442546</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Urla pasa geltoki moduan.">
+      <option name="closed" value="true" />
+      <created>1732121290039</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1732121290039</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Alarma kudeaketan zerrenda gehituta eta biziberritzea 14 minuturo.">
+      <option name="closed" value="true" />
+      <created>1732827877844</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1732827877845</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Estalkirik gabeko apscheduler biziberritze funtziorako eta lan-zerrendan aldaketa kosmetikoak.">
+      <option name="closed" value="true" />
+      <created>1732897078001</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1732897078001</updated>
+    </task>
+    <task id="LOCAL-00024" summary="lanik ez dagoenen adierazi eta lan laguntzaileak ez zerrendatu.">
+      <option name="closed" value="true" />
+      <created>1733421817294</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1733421817294</updated>
+    </task>
+    <task id="LOCAL-00025" summary="bugfixa eta lan ezabaketaren hasiera.">
+      <option name="closed" value="true" />
+      <created>1733423313283</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1733423313283</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Kendu elkarrizketa-egoera bypasseatu.">
+      <option name="closed" value="true" />
+      <created>1733600048536</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1733600048536</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Version specification removed for playwright" />
+    <MESSAGE value="pip upgrade included to dockerfie" />
+    <MESSAGE value="Image generation from playwright page added" />
+    <MESSAGE value="Use playwright image." />
+    <MESSAGE value="Install python3.10 and pip" />
+    <MESSAGE value="CMD corrected" />
+    <MESSAGE value="Always load constants and dont expose port" />
+    <MESSAGE value="pytz added to reqs and port exposed" />
+    <MESSAGE value="specific jobque install for python-telegram-bot" />
+    <MESSAGE value="MY_USER changed to USER" />
+    <MESSAGE value="start_webhook to run_webhook" />
+    <MESSAGE value="Specifically install webhooks with PTB" />
+    <MESSAGE value="Biziberritzeko lana gehitu" />
+    <MESSAGE value="ping specific port in back4app container" />
+    <MESSAGE value="pass context parameter to pin_self function." />
+    <MESSAGE value="biziberritzea 27ro eta 0 timeouteko gotoa url-ra" />
+    <MESSAGE value="Biziberritze saiakerarik gabeko proba." />
+    <MESSAGE value="Healthcheck gehituta." />
+    <MESSAGE value="requests modulua requirements.txt-en gehituta, eta ping_self POST eskari bat egiteko eraldatuta, eta healthcheck kenduta." />
+    <MESSAGE value="Urla pasa geltoki moduan." />
+    <MESSAGE value="Alarma kudeaketan zerrenda gehituta eta biziberritzea 14 minuturo." />
+    <MESSAGE value="Estalkirik gabeko apscheduler biziberritze funtziorako eta lan-zerrendan aldaketa kosmetikoak." />
+    <MESSAGE value="lanik ez dagoenen adierazi eta lan laguntzaileak ez zerrendatu." />
+    <MESSAGE value="bugfixa eta lan ezabaketaren hasiera." />
+    <MESSAGE value="Kendu elkarrizketa-egoera bypasseatu." />
+    <option name="LAST_COMMIT_MESSAGE" value="Kendu elkarrizketa-egoera bypasseatu." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file:///usr/lib/python3.10/datetime.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

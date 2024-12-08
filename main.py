@@ -2,7 +2,7 @@ import asyncio
 import logging
 from playwright.async_api import async_playwright
 from telegram import Update
-from telegram.ext import CommandHandler, ContextTypes, Application
+from telegram.ext import CommandHandler, ContextTypes, Application, Defaults
 import datetime
 import pytz
 import settings, elkarrizketa, alarma_kudeaketa
@@ -22,9 +22,9 @@ logger = logging.getLogger(__name__)
 
 spain_tz = pytz.timezone('Europe/Madrid')
 
-DEV_DIC = {"Geltokia": r"https://dbus.eus/parada/129-herrera-2/", "Linea": "13", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
-                         "Noiz": "2", "Errepikapena": "0"}
-
+DEV_DIC = {"Geltokia": r"https://dbus.eus/parada/125-arri-berri-2/", "Linea": "24", "Noiztik": (datetime.datetime.now(spain_tz) + datetime.timedelta(minutes=1)).strftime('%H:%M'),
+                         "Noiz": "70"}
+scheduler1 = BackgroundScheduler()
 
 def ping_self():
 
@@ -41,17 +41,7 @@ async def start(update: Update, context) -> None:
     if GARAPEN == "1":
             finkatu_alarma(update, context, DEV_DIC)
     else:
-        await update.message.reply_text("Kaixo! Erabili /gehitu dbus alarma bat ezartzeko")
-
-
-def remove_job_if_exists(name: str, context: ContextTypes.DEFAULT_TYPE) -> bool:
-    """Remove job with given name. Returns whether job was removed."""
-    current_jobs = context.job_queue.get_jobs_by_name(name)
-    if not current_jobs:
-        return False
-    for job in current_jobs:
-        job.schedule_removal()
-    return True
+        await update.message.reply_text("Kaixo! Erabili /gehitu dbus alarma bat ezartzeko eta /kudeatu zerrendatu eta kentzeko.")
 
 
 async def begiratu(context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -72,7 +62,6 @@ async def begiratu(context: ContextTypes.DEFAULT_TYPE) -> None:
         dynamic_content = await element.text_content()  # Use await with text_content
         await browser.close()  # Use await with close
 
-    #try:
     if not dynamic_content or "min." not in dynamic_content or dicAlarma_job["Linea"] not in dynamic_content:  # Errore kudeaketa hobea
         raise(Exception)
     minutuak = dynamic_content.split(f"Linea {dicAlarma_job['Linea']}")[1].split("min.")[0][-3:-1]
@@ -81,20 +70,17 @@ async def begiratu(context: ContextTypes.DEFAULT_TYPE) -> None:
             begiratu,
             int((int(minutuak)-int(dicAlarma_job["Noiz"]))/2*60), # TODO: irakurritako denbora2 > denbora1 bada kasorik ez
             name=str(context.job.chat_id)+context.job.data["Geltokia"]+context.job.data["Linea"]
-                         +context.job.data["Noiztik"]+context.job.data["Noiz"]+context.job.data["Errepikapena"]+"_aux",
+                         +context.job.data["Noiztik"]+context.job.data["Noiz"]+"_aux",
             data=context.job.data,
             chat_id=context.job.chat_id)
     else:
-        await context.bot.send_message(context.job.chat_id, text="Alarmaa!!"+minutuak)
-    #except:
-    """
-    await context.bot.send_message(context.job.chat_id, "Egiaztatu geltoki horretatik pasatzen dela adierazitako linea emandako ordutik"
-                                   " gehienez ordubetera. Alarma ezeztatuta."+dynamic_content)
-    remove_job_if_exists(str(context.job.chat_id)+context.job.data["Geltokia"]+context.job.data["Linea"]
-                         +context.job.data["Noiztik"]+context.job.data["Noiz"]+context.job.data["Errepikapena"], context)"""
+        text=f"🚏{dicAlarma_job['Geltokia'].split('/')[-2]}; {dicAlarma_job['Linea']} linea; {minutuak} min.; Badator... 🚌! 🏃‍♀️"
+        await context.bot.send_message(context.job.chat_id, text=text)
     if GARAPEN == "1":
         await context.bot.send_message(context.job.chat_id, text=minutuak)
-
+    # Pausatu biziberritzea besterik ez bada
+    if context.job_queue.jobs() is None:
+        scheduler1.shutdown()
 
 def finkatu_alarma(update: Update, context, data: dict) -> None:
     """
@@ -104,29 +90,38 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
     :param data:
     :return:
     """
+    scheduler1.start()
     chat_id = update.effective_message.chat_id
 
-    context.job_queue.run_daily(
+    context.job_queue.run_once(
         begiratu,
-        datetime.time(int(data["Noiztik"][0:2]), int(data["Noiztik"][3:5]), tzinfo=spain_tz),
-        (0, 1, 2, 3, 4, 5, 6),  # TODO: Eskuratu erabiltzailearengandik.
+        datetime.time(int(data["Noiztik"][0:2]), int(data["Noiztik"][3:5])),
         data=data,
-        name=str(chat_id)+data["Geltokia"]+data["Linea"]+data["Noiztik"]+data["Noiz"]+data["Errepikapena"],
+        name=str(chat_id)+data["Geltokia"]+data["Linea"]+data["Noiztik"]+data["Noiz"],
         chat_id=chat_id,
     )
+    pass
 
 def main() -> None:
     """Run the bot."""
+    # Berezkoak sortu
+    defaults = Defaults(
+        tzinfo=spain_tz,
+        disable_web_page_preview=True
+    )
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(settings.TELEGRAM_TOKEN).build()
-
+    application = (
+        Application.builder()
+        .token(settings.TELEGRAM_TOKEN)
+        .defaults(defaults)
+        .build()
+    )
     # Dbus alarma finktatzeko elkarrizketa kudeatzailea sortu eta gehitu.
     application.add_handler(CommandHandler(["start", "help"], start))
     application.add_handler(elkarrizketa.conv_handler)
     application.add_handler(alarma_kudeaketa.conv_handler)
 
     # Bizirik jarraitzeko lana gehitu
-    scheduler1 = BackgroundScheduler()
     scheduler1.add_job(id='biziberritu', func=ping_self, trigger='interval', seconds=14*60)
     scheduler1.start()
 
