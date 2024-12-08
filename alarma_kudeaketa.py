@@ -23,6 +23,7 @@ async def kudeatu(update: Update, context: CallbackContext) -> int:
             await update.message.reply_text('Finkatutako alarma(k) borratu nahiez gero, idatzi "1", bestela, "0".')
     else:
         await update.message.reply_text("Ez duk alarmarik gordeta, txikito.")
+        return ConversationHandler.END
     return KENDU
 
 async def kendu(update: Update, context: CallbackContext) -> int:
@@ -32,7 +33,7 @@ async def kendu(update: Update, context: CallbackContext) -> int:
         for job in jobs:
             if str(update.message.chat.id) in job.name:
                 job.schedule_removal()
-        await update.message.reply_text('Zure lanak kendu dira')
+        await update.message.reply_text('Zure lanak zuzen kendu dira. Hurren arte!')
     else:
         await update.message.reply_text('Ederki. Lanik kendu gabe utziko dugu elkarrizketa. Hurren arte!')
     return ConversationHandler.END
