@@ -78,9 +78,10 @@ async def begiratu(context: ContextTypes.DEFAULT_TYPE) -> None:
         await context.bot.send_message(context.job.chat_id, text=text)
     if GARAPEN == "1":
         await context.bot.send_message(context.job.chat_id, text=minutuak)
-    # Pausatu biziberritzea besterik ez bada
+    # Pausatu biziberritzea beste lanik ez bada
     if context.job_queue.jobs() is None:
-        scheduler1.shutdown()
+        if scheduler1.running:
+            scheduler1.shutdown()
 
 def finkatu_alarma(update: Update, context, data: dict) -> None:
     """
@@ -90,7 +91,9 @@ def finkatu_alarma(update: Update, context, data: dict) -> None:
     :param data:
     :return:
     """
-    scheduler1.start()
+    if not scheduler1.running:
+        scheduler1.start()
+
     chat_id = update.effective_message.chat_id
 
     context.job_queue.run_once(
